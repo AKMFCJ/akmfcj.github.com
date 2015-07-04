@@ -1,4 +1,5 @@
 # emacs edits
+.idea/
 *~
 Thumbs.db
 .DS_Store
