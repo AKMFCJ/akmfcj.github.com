@@ -1,6 +1,7 @@
 ---
 layout: post
 category: Python
+tilte: supervisor
 tagline: "Supporting tagline"
 tags: [Python]
 ---
@@ -8,13 +9,14 @@ tags: [Python]
 
 supervisor是一个进程监控程序。
 监控程序的执行，在程序出错终止后，supervisor可以启动程序。
-##一、下载/安装
+
+###一、下载/安装
     https://pypi.python.org/pypi/supervisor
     doc: http://supervisord.org/
     pip安装sudo pip install supervisor
     测试安装是否成功,执行echo_supervisord_conf命令    
 
-##二、配置
+###二、配置
     创建配置文件，命令
     sudo echo_supervisord_conf > /etc/supervisord.conf
     如果你没有权限生成/etc/supervisord.conf文件，你可以用echo_supervisord_conf > supervisord.conf 命令将文件生成在其他目录下，通过supervisord命令的-c参数指定conf文件
@@ -46,7 +48,7 @@ supervisor是一个进程监控程序。
     通过浏览器访问http://127.0.0.1:9001
     
 
-##三、命令
+###三、命令
     supervisord #启动supervisor服务
     supervisorctl #打开supervisor命令行
     在命令行中可以用help 查看命令帮助，status查看supervisord中程序的状态
