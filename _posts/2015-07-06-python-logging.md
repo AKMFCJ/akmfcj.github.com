@@ -103,8 +103,8 @@ logging.warning('This is warning message')
 import logging
 from logging.handlers import RotatingFileHandler
 
-###################################################
-#定义一个RotatingFileHandler, 最多备份5个日志文件,每个日志文件最大10M
+\###################################################
+\#定义一个RotatingFileHandler, 最多备份5个日志文件,每个日志文件最大10M
 rthandler = RotatingFileHandler('demo.log', maxBytes=10*1024*1024, backupCount=5)
 rthandler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(name)-12s:%(levelname)-8s %(message)s)
@@ -131,8 +131,8 @@ handler有如下几种:
 因为StreamHandler和FileHandler是最常用的日志处理方式，所以直接包含在了logging模块中，其他处理方式则包含着logging.handlers模块中。
 
 通过logging.config模块配置日志
-#logger.conf
-###############################################
+\#logger.conf
+\###############################################
 [loggers]
 keys=root,example01,example02
 [logger_root]
@@ -146,7 +146,7 @@ propagate=0
 handlers=hand01,hand03
 qualname=example02
 propagate=0
-###############################################
+\###############################################
 [handlers]
 keys=hand01,hand02,hand03
 [handler_hand01]
@@ -164,7 +164,7 @@ class=handlers.RotatingFileHandler
 level=INFO
 formatter=form02
 args=('myapp.log', 'a', 10*1024*1024, 5)
-###############################################
+\###############################################
 [formatters]
 keys=form01,form02
 [formatter_form01]
@@ -207,7 +207,7 @@ logging.error(msg[,*args,[*,kwargs]])
 logging.critical(msg[,*args,[*,kwargs]])
 logging.exception(msg[,*args,[*,kwargs]])
 logging.log(level, msg[,*args,[*,kwargs]])
-logging.disable(level) #禁用所有日志当其级别在level级别及以下，当出现需要暂时截流日志输出下来整个应用程序，这个函数是有用的。
+logging.disable(level) \#禁用所有日志当其级别在level级别及以下，当出现需要暂时截流日志输出下来整个应用程序，这个函数是有用的。
 logging.addLevelName(lel, levename) #自定义级别，lel是int数字，levelname是级别名称
 级别整数如下:
 CRITICAL 50
@@ -217,7 +217,7 @@ INFO     20
 DEBUG    10
 NOTSET   0
 
-logging.getLevelName(lvl) #通过级别整数返回级别名称
+logging.getLevelName(lvl) \#通过级别整数返回级别名称
 
 
 日志组件包括: logger、handlers、filters、formatters
@@ -231,18 +231,18 @@ getLogger()返回日志对象层次关系中的根Logger
 无名对象: logger = logging.getLogger()
 推荐方式: logger = logging.getLogger(__name__)
 logger有如下属性和方法:
-    logger.propagate #1
-    loggger.setLevel(lvl) #设置日志级别，忽略低于此级别的日志。
-    logger.debug(msg, [,*args[, **kwargs]]) #处理DEBUG级别的日志。参数msg是信息的格式字符串，args和kwargs分别是格式参数。args作用于msg，是使用字符串格式操作符(注:这意味着可以使用关键字的格式字符串，连同一个字典参数)。kwargs:两个关键字参数,exc_info/extra
-    logger.info(msg, [,*args[, **kwargs]]) #同上
-    logger.warnning(msg, [,*args[, **kwargs]]) #同上
-    logger.error(msg, [,*args[, **kwargs]]) #同上
-    logger.critical(msg, [,*args[, **kwargs]]) #同上
-    logger.log(lvl, msg,[,*args,[,**kwargs]]) #设置日志级别，同时设置日志格式
-    logger.exception(msg[,*args]) #以ERROR级别记录日志消息，异常跟踪消息将被自动添加到消息里。Logger.exception通常用在异常处理块中excpet部分。
-    logger.addFilter(filt) #添加过滤器
-    logger.removeFilter(filt) #删除过滤器
-    logger.filter(record) #过滤
+    logger.propagate \#1
+    loggger.setLevel(lvl) \#设置日志级别，忽略低于此级别的日志。
+    logger.debug(msg, [,*args[, **kwargs]]) \#处理DEBUG级别的日志。参数msg是信息的格式字符串，args和kwargs分别是格式参数。args作用于msg，是使用字符串格式操作符(注:这意味着可以使用关键字的格式字符串，连同一个字典参数)。kwargs:两个关键字参数,exc_info/extra
+    logger.info(msg, [,*args[, **kwargs]]) \#同上
+    logger.warnning(msg, [,*args[, **kwargs]]) \#同上
+    logger.error(msg, [,*args[, **kwargs]]) \#同上
+    logger.critical(msg, [,*args[, **kwargs]]) \#同上
+    logger.log(lvl, msg,[,*args,[,**kwargs]]) \#设置日志级别，同时设置日志格式
+    logger.exception(msg[,*args]) \#以ERROR级别记录日志消息，异常跟踪消息将被自动添加到消息里。Logger.exception通常用在异常处理块中excpet部分。
+    logger.addFilter(filt) \#添加过滤器
+    logger.removeFilter(filt) \#删除过滤器
+    logger.filter(record) \#过滤
 
 Handler: Handler对象负责分配合适的log信息(基于log信息的严重程度)到handler指定的目的地。Logger最新可以用addHandler()方法添加一个或多个handler。一个常用的场景，是一个应用希望把所有的log信息都写入log文件，所有error级别以上的log信息都发送到stdout，所有critical的log信息通过email发出。这个场景要求三个不同handler处理，每个handler负责把特定的log信息发送到指定的地方。
 StreamHandler：在logging包中，日志输出流，如果sys.stdout/std.stderr
@@ -251,21 +251,21 @@ FileHandler: 日志输出到磁盘文件，它继承了StreamHandler输出功能
     它有close():关闭一个文件;emit(record):输出文件的记录。
 
 handler方法:
-    handler = logging.Handler() #创建Handler对象
-    hanlder.__init__(logging.DEBUG) #通过设置level来初始化Handler实例
-    handler.createLock() #初始化一个线程锁可以用来序列化访问底层I/O功能，这可能不是线程安全的。
-    handler.acquire() #获取线程锁通过handler.createLock()
-    handler.release() #释放线程锁通过获取handler.acquire()
-    handler.setLevel(logging.DEBUG) #设置临界值，如果Logging信息级别小于它则被忽略，当一个handler对象被创建，级别没有被设置，导致所有的信息会被处理。
+    handler = logging.Handler() \#创建Handler对象
+    hanlder.__init__(logging.DEBUG) \#通过设置level来初始化Handler实例
+    handler.createLock() \#初始化一个线程锁可以用来序列化访问底层I/O功能，这可能不是线程安全的。
+    handler.acquire() \#获取线程锁通过handler.createLock()
+    handler.release() \#释放线程锁通过获取handler.acquire()
+    handler.setLevel(logging.DEBUG) \#设置临界值，如果Logging信息级别小于它则被忽略，当一个handler对象被创建，级别没有被设置，导致所有的信息会被处理。
     handler.setFormatter('%(levelname)s, %(message)s') #设置格式
-    handler.addFilter(filter) #添加指定的过滤器
-    handler.removeFilter(filter) #删除过滤器
-    handler.filter(record) #通过设置过滤器适用于记录并返回真值如果是要处理的记录
-    handler.flush() #确保所有的日志已经被刷新
-    handler.close() #释放所使用的资源
-    handler.handle(record) #有条件地发出指定的日志记录，这取决于过滤器可能被添加到处理程序。
-    handler.handlerError(record) #处理错误
-    handler.format(record) #格式输出
+    handler.addFilter(filter) \#添加指定的过滤器
+    handler.removeFilter(filter) \#删除过滤器
+    handler.filter(record) \#通过设置过滤器适用于记录并返回真值如果是要处理的记录
+    handler.flush() \#确保所有的日志已经被刷新
+    handler.close() \#释放所使用的资源
+    handler.handle(record) \#有条件地发出指定的日志记录，这取决于过滤器可能被添加到处理程序。
+    handler.handlerError(record) \#处理错误
+    handler.format(record) \#格式输出
     handler.emit(record)
 
 
@@ -273,15 +273,15 @@ filter: 过滤选择哪些日志输出
 format: 设置日志格式
 方法:
     fm = logging.Formatter('%(levenname)s:%(message)s', '%Y-%m-%d/%H:%M:%S')
-    fm.format() #日志格式化
-    fm.formatTime() #时间格式化
-    fm.formatException() #异常格式化
+    fm.format() \#日志格式化
+    fm.formatTime() \#时间格式化
+    fm.formatException() \#异常格式化
 
 
 ###四、推荐配置
 
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
+\#!/usr/bin/env python
+\#-*- coding:utf-8 -*-
 
 import logging
 import datetime
